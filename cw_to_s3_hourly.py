@@ -9,7 +9,7 @@ def lambda_handler(event, context):
     startOfhour = now.replace(minute=0,second=0, microsecond=0)-timedelta(hours=1)
     endOfhour = now.replace(minute=0,second=0, microsecond=0)
     unix_start = datetime(1970,1,1)
-    group_name = ['/aws/rds/instance/meals/postgresql']
+    group_name = ['/aws/rds/instance/dbinstancename/postgresql']
     for x in group_name:
         response = log_file.create_export_task(
          taskName='eip_rds_pgsql_export_task',
