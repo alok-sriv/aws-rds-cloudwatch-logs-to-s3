@@ -15,7 +15,7 @@ def lambda_handler(event, context):
          logGroupName=x,
          fromTime=int((startOfDay-unix_start).total_seconds() * 1000),
          to=int((endOfDay-unix_start).total_seconds() * 1000),
-         destination='a5hutosh',
+         destination='S3bucketname',
          destinationPrefix='cwlogs/log_date={}/exported_logs-{}'.format(startOfDay.strftime("%Y-%m-%d"),startOfDay.strftime("%Y-%m-%d"))
          )
         return 'Response from export task at {} :\n{}'.format(datetime.now().isoformat(),response)
