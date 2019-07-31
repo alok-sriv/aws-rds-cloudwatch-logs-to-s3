@@ -1,5 +1,5 @@
-CREATE EXTERNAL TABLE `postgres_hourly_logs`(
-  `logtime1` string COMMENT '', 
+CREATE EXTERNAL TABLE `rds_logs`(
+  `logtime1` string COMMENT 'CloudWatch Log Timestamp', 
   `logtime` timestamp COMMENT 'Log timestamp', 
   `tz` string COMMENT 'Log timezone', 
   `client` string COMMENT 'Client IP or hostname', 
@@ -16,7 +16,8 @@ PARTITIONED BY (
   `log_year` int, 
   `log_month` varchar(20), 
   `log_day` int, 
-  `log_hour` int)
+  `log_hour` int, 
+  `instance_name` string)
 ROW FORMAT SERDE 
   'org.apache.hadoop.hive.serde2.RegexSerDe' 
 WITH SERDEPROPERTIES ( 
@@ -27,4 +28,4 @@ STORED AS INPUTFORMAT
 OUTPUTFORMAT 
   'org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat'
 LOCATION
-  's3://bucketname/cwlogs'
+  's3://s3-bucket/logs'
